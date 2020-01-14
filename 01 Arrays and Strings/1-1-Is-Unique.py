@@ -1,7 +1,7 @@
 # Is Unique: Implement an algorithm to determine if a string has all unique characters. What if you
 # cannot use additional data structures?
 
-# Hash Table O(n)
+# Hash Table time and space  O(n)
 def isUnique1(s):
     seen = set()
     for c in s:
@@ -11,7 +11,7 @@ def isUnique1(s):
     
     return True
 
-# Bool Vector O(n)
+# Bool Vector time and space  O(n)
 def isUnique2(s):
     if len(s) > 128:
         return False
@@ -23,7 +23,7 @@ def isUnique2(s):
     
     return True
 
-# Bit Vector O(n) (assume only lowercase letter)
+# Bit Vector time and space O(n) (assume only lowercase letter)
 def isUnique3(s):
     if len(s) > 26:
         return False
@@ -37,7 +37,7 @@ def isUnique3(s):
     
     return True
 
-# Sorting O(n log n ) (save memory at the price of time)
+# Sorting time O(n log n ), space O(1) (save memory at the price of time)
 def isUnique4(s):
     s = sorted([c for c in s])
     last = None

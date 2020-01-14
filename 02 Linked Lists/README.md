@@ -5,3 +5,6 @@
 * Iterate through the linked list with two pointers simultaneously, with one ahead of the other.  
 * The "fast" node might be ahead by a fixed amount, or it might be hopping multiple nodes for each
 one node that the "slow" node iterates through.  
+
+## Recursive Problems  
+* A number of linked list problems rely on recursion.  

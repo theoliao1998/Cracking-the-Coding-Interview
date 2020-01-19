@@ -11,8 +11,8 @@ class ListNode(object):
             n = n.next
         n.next = ListNode(x)
 
-# recursion, time O(n), space O(1), similarly can use a stack
-def palindrome(n):
+# recursion, time O(n), space O(n), similarly we can use a stack
+def palindrome1(n):
     if not n:
         return True
     
@@ -38,7 +38,33 @@ def palindrome(n):
         judge, compare = checkPalindrome(n.next, mid1, mid2)
         return judge and n.val == compare.val, compare.next
 
-    return checkPalindrome(n,mid1,mid2)[0]    
+    return checkPalindrome(n,mid1,mid2)[0]
+
+# reverse and compare, time O(n), space O(n)
+def palindrome2(n):
+
+    def reverse(n):
+        head = ListNode(n.val)
+        while(n.next):
+            tmp = ListNode(n.next.val)
+            tmp.next = head
+            head = tmp
+            n = n.next
+        
+        return head
+    
+    def compare(a,b):
+        while a and b:
+            if a.val != b.val:
+                return False
+            a, b = a.next, b.next
+        
+        if a or b:
+            return False
+        
+        return True
+    
+    return compare(n,reverse(n))
 
 # m = ListNode(9)
 # m.append(7)
@@ -46,6 +72,6 @@ def palindrome(n):
 # m.append(7)
 # m.append(9)
 
-# print(palindrome(m))
+# print(palindrome2(m))
 
         

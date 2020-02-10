@@ -12,20 +12,27 @@ class StackNode:
     def __init__(self,x):
         self.val = x
         self.next = None
+        self.prev = None
     
 
 class Stack:
     def __init__(self):
         self.first = None
+        self.last = None
     
     def push(self, x):
         tmp = self.first
         self.first = StackNode(x)
         self.first.next = tmp
+        if tmp:
+            tmp.prev = self.first
 
     def pop(self):
         tmp = self.first
-        self.first = self.first.next
+        if tmp:
+            self.first = self.first.next
+        if self.first:
+            self.first.prev = None
         return tmp.val if tmp else None
     
     def peek(self):
@@ -34,14 +41,14 @@ class Stack:
     def isEmpty(self):
         return self.first is None
 
-def SetOfStacks:
-    def __init__(self,n, threshold):
+class SetOfStacks:
+    def __init__(self, threshold):
         self.stacks = [Stack()]
         self.capacity = [0]
         self.threshold = threshold
     
     def push(self,x):
-        if self.capacity[-1] > self.threshold:
+        if self.capacity[-1] >= self.threshold:
             self.stacks.append(Stack())
             self.capacity.append(0)
 
@@ -55,7 +62,7 @@ def SetOfStacks:
             self.capacity.pop()
             self.stacks.pop()
         
-        self.capacity[-1] -= 1:
+        self.capacity[-1] -= 1
         return self.stacks[-1].pop()
     
     def peek(self):
@@ -68,13 +75,45 @@ def SetOfStacks:
     def isEmpty(self):
         return self.peek() is None
     
-    # def popAt(self,n):
-    #     if n < len(self.stacks):
-    #         tmp = self.stacks[n].pop()
-    #     else:
-    #         tmp = None
-    #     if tmp is None:
-    #         return None
+    def popAt(self,n):
+        if n < len(self.stacks):
+            tmp = self.stacks[n].pop()
+        else:
+            tmp = None
+        
+        if tmp is not None:
+            for i in range(n+1,len(self.stacks)):
+                t = self.stacks[i].last
+                if t is None:
+                    break
+
+                self.stacks[i-1].push(t.val)
+                t.prev.next = None
+                self.stacks[i].last = t.prev
+                self.stacks[i].capacity -= 1
+        
+            if self.capacity[-1] == 0:
+                self.capacity.pop()
+                self.stacks.pop()
+        
+        return tmp
+
+# s = SetOfStacks(3)
+# for x in range(9):
+#     s.push(x)
+
+# print(s.pop())
+# print(s.capacity)
+
+# print(s.popAt(0))
+
+# print(s.capacity)
+
+# while not s.isEmpty():
+#     print(s.pop())
+                
+
+
 
 
     

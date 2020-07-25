@@ -1,6 +1,6 @@
 
 ## Hash Tables  
-* Implement with linked list
+* Implement with linked list  
 ![ll](https://user-images.githubusercontent.com/53862461/72211488-1f1fb100-349a-11ea-9f13-574b564189a9.PNG)  
   * Worst case runtime is O(N), where N is the number of keys.
   * Assume a good implementation that keeps collisions to a minimum, the lookup time is O(1).  
